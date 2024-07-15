@@ -11,9 +11,11 @@ export const App: React.FC = () => {
   const [searched, setSearched] = useState<string>('');
 
   const search = () => {
-    const tmp = peopleFromServer.filter((person) => (
-      person.name.toLocaleLowerCase().includes(searched.trim().toLocaleLowerCase())
-    ))
+    const tmp = peopleFromServer.filter(person =>
+      person.name
+        .toLocaleLowerCase()
+        .includes(searched.trim().toLocaleLowerCase()),
+    );
 
     setPeople(tmp);
   };
@@ -68,7 +70,9 @@ export const App: React.FC = () => {
     <div className="container">
       <main className="section is-flex is-flex-direction-column">
         <h1 className="title" data-cy="title">
-          {!onSelected ? 'No selected person' : `${onSelected.name} (${onSelected.born} - ${onSelected.died})`}
+          {!onSelected
+            ? 'No selected person'
+            : `${onSelected.name} (${onSelected.born} - ${onSelected.died})`}
         </h1>
 
         <div className="dropdown is-active">
@@ -86,7 +90,11 @@ export const App: React.FC = () => {
           </div>
 
           {focus && (
-            <div className="dropdown-menu" role="menu" data-cy="suggestions-list">
+            <div
+              className="dropdown-menu"
+              role="menu"
+              data-cy="suggestions-list"
+            >
               <div className="dropdown-content">
                 {people.length === 0 ? (
                   <div
@@ -103,8 +111,13 @@ export const App: React.FC = () => {
                     <p className="has-text-danger">No matching suggestions</p>
                   </div>
                 ) : (
-                  people.map((person) => (
-                    <div className="dropdown-item" data-cy="suggestion-item" key={person.name} onClick={() => handleItemClick(person)}>
+                  people.map(person => (
+                    <div
+                      className="dropdown-item"
+                      data-cy="suggestion-item"
+                      key={person.name}
+                      onClick={() => handleItemClick(person)}
+                    >
                       <p className="has-text-link">{person.name}</p>
                     </div>
                   ))
@@ -116,5 +129,4 @@ export const App: React.FC = () => {
       </main>
     </div>
   );
-
 };
